@@ -183,7 +183,11 @@ async function completeMutation(response, requestId) {
 }
 
 before(() => {
-  worker = setupWorker()
+  worker = setupWorker({
+    serviceWorker: {
+      url: '/wealth/app/mockServiceWorker.js'
+    }
+  })
   worker.events.on('request:start', registerRequest)
   worker.events.on('response:mocked', completeRequest)
   worker.events.on('response:bypass', completeRequest)
