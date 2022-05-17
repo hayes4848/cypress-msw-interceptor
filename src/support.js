@@ -183,15 +183,15 @@ async function completeMutation(response, requestId) {
 }
 
 before(() => {
-  worker = setupWorker({
-    serviceWorker: {
-      url: '/wealth/app/mockServiceWorker.js'
-    }
-  })
+  worker = setupWorker()
   worker.events.on('request:start', registerRequest)
   worker.events.on('response:mocked', completeRequest)
   worker.events.on('response:bypass', completeRequest)
-  cy.wrap(worker.start(), { log: false })
+  cy.wrap(worker.start({
+    serviceWorker: {
+      url: '/wealth/app/mockServiceWorker.js'
+    }
+  }), { log: false })
 })
 
 Cypress.on('test:before:run', () => {
