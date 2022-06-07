@@ -189,7 +189,7 @@ before(() => {
   worker.events.on('response:bypass', completeRequest)
   cy.wrap(worker.start({
     serviceWorker: {
-      url: '/wealth/app/mockServiceWorker.js'
+      url: '/wealth/mockServiceWorker.js'
     }
   }), { log: false })
 })
